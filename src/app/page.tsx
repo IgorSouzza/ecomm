@@ -1,9 +1,5 @@
-import { Header } from "@/shared/components/header";
+import { ProductDetailsPage } from "@/features/product-details/page";
 
 export default function Home() {
-  return (
-    <div className="font-[family-name:var(--font-geist-sans)]">
-      <Header />
-    </div>
-  );
+  return <ProductDetailsPage />
 }
