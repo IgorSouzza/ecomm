@@ -23,7 +23,7 @@ export function ProductImageViewer({ product }: ProductImageViewerProps) {
   }, [colorVariant, product.colorVariants]);
 
   return (
-    <div className="w-[35vw]">
+    <div className="w-full lg:w-[35vw]">
       <Image
         src={selectedThumb.src}
         width={600}
