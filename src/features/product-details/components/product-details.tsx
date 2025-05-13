@@ -10,6 +10,7 @@ import {
 import { useProductVariantStore } from "../stores/product-variant-store";
 import { formatToCurrency } from "@/shared/utils/number-format";
 import { ZipCodeSearch } from "./zip-code-search";
+import { saveUserActions } from "@/shared/utils/user-actions";
 
 type ProductDetailsProps = {
   product: Product;
@@ -28,11 +29,13 @@ export function ProductDetails({ product }: ProductDetailsProps) {
   function handleColorChange(e: ChangeEvent<HTMLSelectElement>) {
     const selectedColor = e.target.value as ProductColorVariantKey;
     setColorVariant(selectedColor);
+    saveUserActions();
   }
 
   function handleSizeChange(e: ChangeEvent<HTMLSelectElement>) {
     const selectedSize = e.target.value as ProductSizeVariantKey;
     setSizeVariant(selectedSize);
+    saveUserActions();
   }
 
   return (

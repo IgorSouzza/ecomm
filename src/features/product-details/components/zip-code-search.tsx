@@ -5,20 +5,24 @@ import Cleave from "cleave.js/react";
 import { getAddressByZipCode } from "@/actions/get-address-by-zipcode";
 import { useMutation } from "@tanstack/react-query";
 import { LoaderCircle } from "lucide-react";
+import { saveUserActions, getUserActions } from "@/shared/utils/user-actions";
+
+const savedActions = getUserActions();
 
 export function ZipCodeSearch() {
-  const [zipCode, setZipCode] = useState("");
+  const [zipCode, setZipCode] = useState(savedActions.zipCode || "");
   const [address, setAddress] = useState<string | null>(null);
 
   const { mutateAsync, isPending, error } = useMutation({
     mutationFn: getAddressByZipCode,
     onSuccess: (response) => {
-      setAddress(
-        `${response.street}, ${response.neighborhood} - ${response.city}/${response.state}`
-      );
+      const _address = `${response.street}, ${response.neighborhood} - ${response.city}/${response.state}`;
+      setAddress(_address);
+      saveUserActions({ zipCode });
     },
     onError: () => {
       setAddress(null);
+      saveUserActions({ zipCode: null });
     },
   });
 
