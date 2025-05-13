@@ -15,7 +15,7 @@ type ActionsData = {
 const COOKIE_EXPIRE_MINUTES = 15;
 
 export function saveUserActions(actions?: Record<string, unknown>) {
-  const initialActions = localStorage.getItem("actions");
+  const initialActions = Cookies.get("actions");
   const parsedInitialActions = JSON.parse(initialActions || "{}");
 
   // stores
@@ -28,6 +28,7 @@ export function saveUserActions(actions?: Record<string, unknown>) {
     sizeVariant,
     ...actions,
   };
+  console.log("saving", final);
 
   Cookies.set("actions", JSON.stringify(final), {
     expires: COOKIE_EXPIRE_MINUTES / 1440,
@@ -35,7 +36,6 @@ export function saveUserActions(actions?: Record<string, unknown>) {
 }
 
 export function getUserActions(): ActionsData {
-  if (!window) return {};
   const initialActions = Cookies.get("actions");
   return initialActions ? JSON.parse(initialActions) : {};
 }

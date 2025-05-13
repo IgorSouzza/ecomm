@@ -9,7 +9,7 @@ import { saveUserActions, getUserActions } from "@/shared/utils/user-actions";
 
 const savedActions = getUserActions();
 
-export function ZipCodeSearch() {
+export default function ZipCodeSearch() {
   const [zipCode, setZipCode] = useState(savedActions.zipCode || "");
   const [address, setAddress] = useState<string | null>(null);
 
@@ -56,3 +56,5 @@ export function ZipCodeSearch() {
     </div>
   );
 }
+
+export { ZipCodeSearch }

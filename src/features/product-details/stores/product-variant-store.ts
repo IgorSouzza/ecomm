@@ -2,10 +2,9 @@ import {
   ProductColorVariantKey,
   ProductSizeVariantKey,
 } from "@/shared/entities/product";
-import { getUserActions } from "@/shared/utils/user-actions";
 import { create } from "zustand";
 
-interface ProductVariantState {
+export interface ProductVariantState {
   colorVariant: ProductColorVariantKey;
   sizeVariant: ProductSizeVariantKey;
   setColorVariant: (variant: ProductColorVariantKey) => void;
@@ -13,8 +12,8 @@ interface ProductVariantState {
 }
 
 const useProductVariantStore = create<ProductVariantState>()((set) => ({
-  colorVariant: getUserActions()?.colorVariant || "black",
-  sizeVariant: getUserActions()?.sizeVariant || "p",
+  colorVariant: "black",
+  sizeVariant: "p",
   setColorVariant: (variant) => {
     set({ colorVariant: variant });
   },

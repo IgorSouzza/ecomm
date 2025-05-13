@@ -1,6 +1,7 @@
 "use client";
 
 import { ChangeEvent } from "react";
+import dynamic from "next/dynamic";
 
 import {
   Product,
@@ -9,19 +10,21 @@ import {
 } from "@/shared/entities/product";
 import { useProductVariantStore } from "../stores/product-variant-store";
 import { formatToCurrency } from "@/shared/utils/number-format";
-import { ZipCodeSearch } from "./zip-code-search";
 import { saveUserActions } from "@/shared/utils/user-actions";
+const ZipCodeSearch = dynamic(() => import("./zip-code-search"), {
+  ssr: false,
+});
 
 type ProductDetailsProps = {
   product: Product;
 };
 
 export function ProductDetails({ product }: ProductDetailsProps) {
-  const colorVariant = useProductVariantStore((store) => store.colorVariant);
+  const colorVariant = useProductVariantStore.getState().colorVariant;
   const setColorVariant = useProductVariantStore(
     (store) => store.setColorVariant
   );
-  const sizeVariant = useProductVariantStore((store) => store.sizeVariant);
+  const sizeVariant = useProductVariantStore.getState().sizeVariant;
   const setSizeVariant = useProductVariantStore(
     (store) => store.setSizeVariant
   );
