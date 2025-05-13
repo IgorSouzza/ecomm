@@ -9,6 +9,7 @@ import {
 } from "@/shared/entities/product";
 import { useProductVariantStore } from "../stores/product-variant-store";
 import { formatToCurrency } from "@/shared/utils/number-format";
+import { ZipCodeSearch } from "./zip-code-search";
 
 type ProductDetailsProps = {
   product: Product;
@@ -41,7 +42,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
         {formatToCurrency(product.price)}
       </h2>
       <div className="flex gap-4">
-        <div className="flex flex-col mt-4">
+        <div className="flex flex-col">
           <label>Cor</label>
           <select
             name="color"
@@ -57,7 +58,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
             ))}
           </select>
         </div>
-        <div className="flex flex-col mt-4">
+        <div className="flex flex-col">
           <label>Tamanho</label>
           <select
             name="color"
@@ -73,6 +74,10 @@ export function ProductDetails({ product }: ProductDetailsProps) {
             ))}
           </select>
         </div>
+      </div>
+
+      <div className="mt-4">
+        <ZipCodeSearch />
       </div>
     </div>
   );
